@@ -2,4 +2,4 @@ steps:
 - name: 'gcr.io/cloud-builders/gradle'
   args: ["appengineStage"]
 - name: 'gcr.io/cloud-builders/gcloud'
-  args: ["gcloud", "app", "deploy", "./build/staged-app"]
+  args: [app", "deploy", "./build/staged-app"]
