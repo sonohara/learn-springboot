@@ -13,6 +13,10 @@ buildscript {
 	}
 }
 
+plugins {
+  id "com.diffplug.gradle.spotless" version "3.15.0"
+}
+
 apply plugin: 'java'
 apply plugin: 'eclipse'
 apply plugin: 'org.springframework.boot'
@@ -40,5 +44,11 @@ appengine {
 	deploy {
 		stopPreviousVersion = true	// default - stop the current version
 		promote = true				// default - & make this the current version
+	}
+}
+
+spotless {
+	java {
+		googleJavaFormat('1.6')
 	}
 }
