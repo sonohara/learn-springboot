@@ -3,3 +3,5 @@ steps:
   args: ["appengineStage"]
 - name: 'gcr.io/cloud-builders/gcloud'
   args: ["app", "deploy", "./build/staged-app"]
+tags:
+- 'github-sonohara-_my_springboot'
