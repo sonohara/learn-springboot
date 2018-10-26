@@ -41,9 +41,14 @@ dependencies {
 }
 
 appengine {
+	stage {
+		appEngineDirectory = 'ci/appengine'	// path/to/app.yaml
+		dockerDirectory = 'ci/appengine'	// path/to/Dockerfile
+	}
 	deploy {
-		stopPreviousVersion = true	// default - stop the current version
-		promote = true				// default - & make this the current version
+		appEngineDirectory = 'ci/appengine'	// path/to/app.yaml
+		stopPreviousVersion = true			// default - stop the current version
+		promote = true						// default - & make this the current version
 	}
 }
 
