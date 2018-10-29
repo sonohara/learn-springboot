@@ -40,6 +40,23 @@ dependencies {
 	testImplementation('org.springframework.boot:spring-boot-starter-test')
 }
 
+eclipse {
+	classpath {
+		// Gradle のビルドパスと一致するように変更する
+		file {
+			beforeMerged { classpath ->
+				classpath.entries.removeAll { it.kind == "src" }
+			}
+			whenMerged { classpath ->
+				classpath.entries.findAll { it.path.startsWith("src/main/java") }*.output      = "build/classes/java/main"
+				classpath.entries.findAll { it.path.startsWith("src/main/resources") }*.output = "build/resources/main"
+				classpath.entries.findAll { it.path.startsWith("src/test/java") }*.output      = "build/classes/java/test"
+				classpath.entries.findAll { it.path.startsWith("src/test/resources") }*.output = "build/resources/test"
+			}
+		}
+	}
+}
+
 appengine {
 	stage {
 		appEngineDirectory = 'ci/appengine'	// path/to/app.yaml
