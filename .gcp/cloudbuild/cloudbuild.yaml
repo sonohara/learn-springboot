@@ -1,5 +1,18 @@
+# 
+# `gradle appengineDeploy` を実行するには Google Cloud SDK が必須だが、
+# gradle ビルダーイメージには含まれていないため、以下の方法で無理やりビルドする
+#
+# - gcloud ビルダーイメージをベースに JDK を追加したイメージを作成
+# - 上記イメージ内で `gradle appengineStage` タスクを実行
+#    - appeigineDeploy タスクを実行したいが gcloud のアカウント情報などが使えずエラーになる
+#    - アカウント情報は gcloud ビルダーイメージから直接コマンド実行した場合のみ自動注入される
+# - 上記ステップでビルドした資源を gcloud ビルダーイメージでデプロイする
 steps:
+- name: 'gcr.io/cloud-builders/docker'
+  args: ['build', './.gcp/cloudbuild/', '-t', 'gcr.io/$PROJECT_ID/hoge']
+- name: 'gcr.io/cloud-builders/docker'
+  args: ['run', '-v', '/workspace:/app', 'gcr.io/$PROJECT_ID/hoge', '/app/gradlew', '-b', '/app/build.gradle', 'appengineStage']
 - name: 'gcr.io/cloud-builders/gcloud'
-  args: ["app", "deploy", "./src/main/webapp/WEB-INF/appengine-web.xml"]
+  args: ['app', 'deploy', '/workspace/build/staged-app']
 tags:
 - 'github-sonohara-_my_springboot'
