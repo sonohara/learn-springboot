@@ -1,4 +1,6 @@
 spring:
+    messages:
+        encoding: UTF-8
     devtools:
         restart:
             exclude: static/**,public/**
