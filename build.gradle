@@ -15,6 +15,7 @@ buildscript {
 
 plugins {
   id "com.diffplug.gradle.spotless" version "3.15.0"
+  id 'io.franzbecker.gradle-lombok' version '1.14'
 }
 
 apply plugin: 'java'
@@ -74,4 +75,9 @@ spotless {
 	java {
 		googleJavaFormat('1.6')
 	}
+}
+
+lombok {
+	version = '1.18.4'
+	sha256 = ""
 }
