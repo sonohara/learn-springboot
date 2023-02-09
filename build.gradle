@@ -1,6 +1,6 @@
 buildscript {
 	ext {
-		springBootVersion = '2.1.0.BUILD-SNAPSHOT'
+		springBootVersion = '3.0.2'
 	}
 	repositories {
 		mavenCentral()
@@ -15,7 +15,7 @@ buildscript {
 
 plugins {
   id "com.diffplug.gradle.spotless" version "3.15.0"
-  id 'io.franzbecker.gradle-lombok' version '1.14'
+  id "io.freefair.lombok" version "6.6.1"
 }
 
 apply plugin: 'java'
@@ -27,7 +27,7 @@ apply plugin: 'com.google.cloud.tools.appengine'
 
 group = 'com.gcp'
 version = '0.0.1-SNAPSHOT'
-sourceCompatibility = 1.8
+sourceCompatibility = 1.17
 
 repositories {
 	mavenCentral()
@@ -41,6 +41,7 @@ dependencies {
 	}
 	implementation('org.springframework.boot:spring-boot-starter-thymeleaf')
 	implementation('org.springframework.boot:spring-boot-starter-data-jpa')
+	implementation('org.springframework.boot:spring-boot-starter-validation')
 	implementation('com.h2database:h2')
 	providedCompile('org.springframework.boot:spring-boot-starter-tomcat')
 	runtimeOnly('org.springframework.boot:spring-boot-devtools')
@@ -75,9 +76,4 @@ spotless {
 	java {
 		googleJavaFormat('1.6')
 	}
-}
-
-lombok {
-	version = '1.18.4'
-	sha256 = ""
 }
